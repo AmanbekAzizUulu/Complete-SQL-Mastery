@@ -36,7 +36,7 @@ select
     o.order_date,
     c.first_name,
     s.shipper_name,
-    os.order_status_id
+    os.status_name
 from
 	orders as o
 left outer join
