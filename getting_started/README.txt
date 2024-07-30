@@ -16,4 +16,6 @@ first of all, you need to execute these querries:
 -----------------------------------------------
 ATTENTION!
 
-during the practise, I may have changed the names of some columns for better readability
+- during the practise, I may have changed the names of some columns for better readability
+
+- this repository contains video tutorials that were not added to the video from the resource
