@@ -17,6 +17,8 @@ values(
     
 */
 
+/*
+
 insert into
 	customers (
 			first_name,
@@ -32,15 +34,22 @@ values (
 		'Soffie',
         'Petrova',
         '1994-01-31',
-        null,
+         '505-478-4565',
+        '68th St & Thomas Rd',
         'New York',
         'NY',
         1324
 );
 	
     
-    
-    
+ */ 
+ 
+ 
+ -- INSERT statement is used to add/insert new data into the table;
+ 
+ -- it is a fundamental command for data insertion and is used to 
+ -- insert new data into tables
+ 
     
     
     
