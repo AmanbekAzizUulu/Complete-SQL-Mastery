@@ -14,6 +14,7 @@ values
 
 */
 
+/*
 -- exercise --
 
 insert into 
@@ -79,5 +80,4 @@ values
         3.49
 	);
 
-
-	
+*/	
