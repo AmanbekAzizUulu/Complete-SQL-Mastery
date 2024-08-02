@@ -16,7 +16,7 @@ select
 -- 	   count(payment_date) as count_of_payment_dates,			-- bcs aggregate functions include
 -- 															    -- only non-null values
 	
-    count(invoice_id) as total_rows_affected,
+--     count(invoice_id) as total_rows_affected,
     
 --     using aggregate functions with date data type
 --     max(payment_date) as latest_payment_date,
