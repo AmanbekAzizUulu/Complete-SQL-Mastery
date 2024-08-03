@@ -6,29 +6,29 @@
 -- Выбираем данные из таблицы
 select
     client_id,  						-- Выбираем идентификатор клиента
-    sum(invoice_total) as total_sales 	-- Рассчитываем сумму всех счетов для каждого клиента и задаем имя колонки total_sales
+    sum(invoice_total) as total_sales 				-- Рассчитываем сумму всех счетов для каждого клиента и задаем имя колонки total_sales
 from
-    invoices as inv 					-- Из таблицы invoices, используя псевдоним inv
+    invoices as inv 						-- Из таблицы invoices, используя псевдоним inv
 group by
     client_id 							-- Группируем результаты по идентификатору клиента
 having
-    total_sales >= 500; 				-- Фильтруем группы, оставляя только те, где сумма продаж total_sales больше или равна 500
+    total_sales >= 500; 					-- Фильтруем группы, оставляя только те, где сумма продаж total_sales больше или равна 500
 
 -- Порядок выполнения запроса:
 
 -- 1. USE sql_invoicing;
 --    Этот оператор устанавливает базу данных sql_invoicing, в которой будет 
 --    выполняться запрос. Это не часть запроса SELECT, но задает контекст, в 
--- 	  котором запрос будет выполнен.
+--    котором запрос будет выполнен.
 
 -- 2. FROM invoices as inv
 --    Указывает, что данные будут извлечены из таблицы invoices, которая 
--- 	  получает псевдоним inv. Псевдонимы используются для упрощения ссылок 
--- 	  на таблицы и колонны.
+--    получает псевдоним inv. Псевдонимы используются для упрощения ссылок 
+--    на таблицы и колонны.
 
 -- 3. GROUP BY client_id
 --    Группирует результаты по колонке client_id. Это означает, что агрегатные 
--- 	  функции, такие как SUM(), будут вычисляться для каждой группы клиентов.
+--    функции, такие как SUM(), будут вычисляться для каждой группы клиентов.
 
 -- 4. SELECT client_id, SUM(invoice_total) AS total_sales
 --    Выбирает колонки для отображения в результатах. Здесь выбирается client_id и 
@@ -49,16 +49,16 @@ having
 -- 		затем WHERE, 
 -- 		потом GROUP BY, 
 -- 		далее HAVING, 
---  	после этого SELECT, и, 
+--  	        после этого SELECT, и, 
 -- 		наконец, ORDER BY.
 */
 
 /*
 select
-	client_id,
-    sum(invoice_total) as total_sales,
-    count(distinct client_id),
-    count(distinct invoice_id) as number_of_invoices,
+    	client_id,
+   	sum(invoice_total) as total_sales,
+    	count(distinct client_id),
+    	count(distinct invoice_id) as number_of_invoices,
 	count(invoice_id)
 from
 	invoices
@@ -66,7 +66,7 @@ group by
 	client_id
 having 
 	total_sales > 500 and
-    number_of_invoices > 5;
+    	number_of_invoices > 5;
 */
 
 
@@ -77,26 +77,26 @@ use sql_store;
 
 -- Selects data from the database
 select
-    c.customer_id,  		    					 -- Selects the unique identifier for the customer
+    c.customer_id,  		    					 	 -- Selects the unique identifier for the customer
     c.first_name,   								 -- Selects the customer's first name
     c.last_name,    								 -- Selects the customer's last name
-    sum(oi.quantity * oi.unit_price) as total_sales  -- Calculates the total sales amount for each customer
+    sum(oi.quantity * oi.unit_price) as total_sales  				 -- Calculates the total sales amount for each customer
 from
     customers as c  								 -- Specifies the table containing customer information, using an alias 'c'
 join
-    orders as o  									 -- Specifies the table containing orders, using an alias 'o'
+    orders as o  								 -- Specifies the table containing orders, using an alias 'o'
     using (customer_id)  							 -- Joins 'orders' with 'customers' on the 'customer_id' column
 join
     order_items as oi  								 -- Specifies the table containing items in each order, using an alias 'oi'
-    on o.order_id = oi.order_id  					 -- Joins 'order_items' with 'orders' on the 'order_id' column
+    on o.order_id = oi.order_id  				        	 -- Joins 'order_items' with 'orders' on the 'order_id' column
 where 
-    state = 'VA'  									 -- Filters the results to include only orders from the state 'VA'
+    state = 'VA'  								 -- Filters the results to include only orders from the state 'VA'
 group by
     c.customer_id,  								 -- Groups results by customer ID to aggregate sales data per customer
     c.first_name,   								 -- Also groups by customer's first name
     c.last_name     								 -- Also groups by customer's last name
 having
-    total_sales > 100;                       		 -- Filters groups to include only customers with total sales greater than 100
+    total_sales > 100;                       					 -- Filters groups to include only customers with total sales greater than 100
 
 -- Explanation of Each Row:
 
