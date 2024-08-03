@@ -10,11 +10,11 @@ select
 from
     payments as ps
 join
-    payment_methods pms
+    payment_methods as pms
     on
         ps.payment_method_id = pms.payment_method_id
 group by
-    payment_method_name,
+    pms.payment_method_name,
     ps.amount with rollup;
 ```
 
