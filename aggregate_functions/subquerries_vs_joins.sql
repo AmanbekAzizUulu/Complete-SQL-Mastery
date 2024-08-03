@@ -59,31 +59,42 @@ use sql_store;
 
 /*
 -- querry # 1
-select
-	customer_id,
-    first_name,
-    last_name
+					
+select						-- Select customer details
+    customer_id, 				-- Select the customer_id
+    first_name,   				-- Select the first_name
+    last_name     				-- Select the last_name
 from
-	customers
+    customers     				-- From the customers table
 where
-	customer_id in
-		(
-			select
-				distinct customer_id
-			from
-				orders
-			where
-				order_id in
-					(
-						select
-							order_id
-						from 
-							order_items
-						where
-							product_id = 3
+    customer_id in  				-- Where customer_id is in the result set of the subquery
+        (
+            select				-- Subquery to find distinct customers who have orders with product_id = 3 
+                distinct customer_id  		-- Select distinct customer_id
+            from
+                orders  			-- From the orders table
+            where
+                order_id in  			-- Where order_id is in the result set of the subquery
+                    (		
+                        select			-- Subquery to find order_ids that contain product_id = 3
+                            order_id 		-- Select the order_id
+                        from 
+                            order_items  	-- From the order_items table
+                        where
+                            product_id = 3  	-- Where the product_id is 3
                     )
         )
 ;
+
+-- Explanation:
+
+-- The main query selects customer details (customer_id, first_name, last_name) from the customers table.
+-- The `WHERE` clause filters these customers based on whether their customer_id is in the result set of a subquery.
+-- The first subquery selects distinct customer_id from the orders table.
+-- It uses a nested subquery to filter orders that contain product_id = 3.
+-- The innermost subquery selects order_id from the order_items table where product_id is 3.
+-- This structure ensures that only customers who have ordered product_id = 3 are selected in the main query.
+
 
 */
 
@@ -91,8 +102,8 @@ where
 -- querry # 2
 select
 	customer_id,
-    first_name,
-    last_name
+    	first_name,
+    	last_name
 from
 	customers
 where
@@ -115,8 +126,8 @@ where
 -- querry # 3
   select
 	distinct customer_id,
-    first_name,
-    last_name
+    	first_name,
+    	last_name
 from
 	customers as c
 left join
