@@ -1,14 +1,14 @@
 SELECT
-    * 											-- Select all columns from the employees table
+    * 											         -- Select all columns from the employees table
 FROM
-    employees AS empls_outer 					-- Alias for the outer query table
+    employees AS empls_outer 					      -- Alias for the outer query table
 WHERE
-    salary < 									-- Filter to include only those rows where the salary is below the average salary
+    salary < 									         -- Filter to include only those rows where the salary is below the average salary
     (
-        SELECT									-- Subquery to calculate the average salary for each office
-            AVG(salary) 						-- Calculate the average salary
+        SELECT									         -- Subquery to calculate the average salary for each office
+            AVG(salary) 						      -- Calculate the average salary
         FROM
-            employees AS empls_inner 			-- Alias for the inner query table
+            employees AS empls_inner 		      -- Alias for the inner query table
         WHERE
             office_id = empls_outer.office_id 	-- Ensure the average salary is calculated for the same office as the outer query
     );
@@ -24,7 +24,7 @@ WHERE
 -- 1. First, the subquery is executed: `SELECT AVG(salary) FROM employees AS empls_inner WHERE office_id = empls_outer.office_id`.
 --    In this subquery, the average salary of employees is calculated for each office.
 -- 2. The subquery is executed for each row of the outer query, where `empls_outer.office_id` is replaced with the office ID from the current row of the outer query.
--- 3. After calculating the average salary for each office, the main query selects all rows from the 'employees' table where the salary is less than the average salary of the corresponding office.
+-- 3. After calculating the average salary for each office, the main query selects all rows from the 'employees' table where the salary is less than the average salary of the corresponding             office.
 -- 4. The result of the query is employees whose salary is below the average salary in their office.
 
 ---
