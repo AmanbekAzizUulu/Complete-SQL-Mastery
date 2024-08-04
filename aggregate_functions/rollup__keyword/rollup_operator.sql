@@ -17,21 +17,21 @@ group by
 /*
 
 -- for multiple tables
-												-- Selects data from the database
+						-- Selects data from the database
 select
-    cl.state,  									-- Selects the state from the clients table
-    cl.city,   									-- Selects the city from the clients table
-    count(inv.client_id),  						-- Counts the number of invoices for each client
-    sum(inv.invoice_total) as total_sales  		-- Calculates the total sales amount for each group
+    cl.state,  					-- Selects the state from the clients table
+    cl.city,   					-- Selects the city from the clients table
+    count(inv.client_id),  			-- Counts the number of invoices for each client
+    sum(inv.invoice_total) as total_sales	-- Calculates the total sales amount for each group
 from
-    invoices as inv  							-- Specifies the invoices table, using an alias 'inv'
+    invoices as inv  				-- Specifies the invoices table, using an alias 'inv'
 right join
-    clients as cl								-- Specifies the clients table, using an alias 'cl'
-    on inv.client_id = cl.client_id				-- Joins invoices with clients on the client_id column
+    clients as cl				-- Specifies the clients table, using an alias 'cl'
+    on inv.client_id = cl.client_id		-- Joins invoices with clients on the client_id column
 group by
-    state, 				 						-- Groups results by state
-    city    									-- Groups results by city
-    with rollup;  								-- Includes subtotals and grand totals for each grouping level
+    state, 				 	-- Groups results by state
+    city    					-- Groups results by city
+    with rollup;  				-- Includes subtotals and grand totals for each grouping level
 
 -- Explanation of Order of Execution:
 
