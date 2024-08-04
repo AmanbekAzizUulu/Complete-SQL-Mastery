@@ -29,31 +29,26 @@ WHERE
 
 ---
 
-В данном фрагменте запроса происходит следующее:
+In this fragment of the query:
 
 ```sql
 WHERE office_id = empls_outer.office_id
 ```
 
-### Пояснение
+Explanation
+WHERE office_id = empls_outer.office_id: This part of the code is a filtering condition in the subquery. It matches the office ID (office_id) of the employees for whom the average salary is being calculated with the office ID of the current employee in the outer query.
+Execution Order
+Outer Query: For each row in the outer query, empls_outer represents the current employee whose salary we want to compare.
 
-- **`WHERE office_id = empls_outer.office_id`**: Этот фрагмент кода является условием фильтрации в подзапросе. Он сопоставляет идентификатор офиса (`office_id`) сотрудников, для которых вычисляется средняя зарплата, с идентификатором офиса текущего сотрудника в основном запросе.
+Subquery: The subquery is executed for each row of the outer query. In the subquery:
 
-### Порядок выполнения
-
-1. **Внешний запрос**: Для каждой строки в основном запросе (внешнем запросе), `empls_outer` представляет текущего сотрудника, чью зарплату мы хотим сравнить.
-
-2. **Подзапрос**: Подзапрос выполняется для каждой строки внешнего запроса. В подзапросе:
-   - **`empls_inner`** представляет сотрудников в том же офисе, что и текущий сотрудник из внешнего запроса.
-   - **`office_id = empls_outer.office_id`**: Это условие фильтрует строки в подзапросе так, чтобы средняя зарплата вычислялась только для сотрудников, которые работают в том же офисе, что и текущий сотрудник из внешнего запроса.
-
-### Итог
-
-Таким образом, условие **`WHERE office_id = empls_outer.office_id`** обеспечивает, что средняя зарплата в подзапросе рассчитывается исключительно для сотрудников из того же офиса, что и рассматриваемый сотрудник в основном запросе. Это позволяет основному запросу правильно сравнивать зарплату каждого сотрудника с средней зарплатой их офиса.
-
+empls_inner represents employees in the same office as the current employee from the outer query.
+office_id = empls_outer.office_id: This condition filters rows in the subquery so that the average salary is computed only for employees working in the same office as the current employee from the outer query.
+Conclusion
+Thus, the condition WHERE office_id = empls_outer.office_id ensures that the average salary in the subquery is calculated exclusively for employees from the same office as the employee being considered in the outer query. This allows the outer query to correctly compare each employee’s salary with the average salary of their office.
 ---
 
-Here�s a clearer breakdown of what�s happening with the condition `WHERE office_id = empls_outer.office_id`:
+Here�s a clearer breakdown of what�s happening with the condition `WHERE office_id = empls_outer.office_id`:
 
 1. **For Each Employee**: The condition checks the `office_id` of the current employee in the outer query (let's call this employee `employee_X`).
 
@@ -93,7 +88,7 @@ Suppose we have employees as follows:
 - For **Employee 3**, it will again evaluate salaries of employees with `office_id = 1`.
 - For **Employee 4**, it will evaluate salaries of employees with `office_id = 2`.
 
-Each employee�s salary is compared against the average salary of their own office, ensuring the comparison is always relevant to the office they belong to.
+Each employee�s salary is compared against the average salary of their own office, ensuring the comparison is always relevant to the office they belong to.
 
 
 ---
@@ -105,7 +100,7 @@ FROM
 WHERE
     invoice_total > 							-- Condition to filter invoices where the total amount is greater than the average total for the same client
     (
-        SELECT									-- Subquery to calculate the average invoice total for each client		
+        SELECT									-- Subquery to calculate the average invoice total for each client
             AVG(invoice_total) 					-- Calculate the average total invoice amount
         FROM
             invoices AS inv_inner 				-- Alias for the inner query table (used in the subquery)
