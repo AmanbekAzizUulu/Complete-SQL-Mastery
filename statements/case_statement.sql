@@ -24,7 +24,7 @@ from
 select
     concat(first_name, ' ', last_name) as 'customer\'s full name',  -- combine first_name and last_name into a full name
     points,  														-- select the points column to show the customer's points
-    case  															-- begin the CASE expression to categorize customers
+    case 															-- begin the CASE expression to categorize customers
         when 
 			points > 3000 then 'gold'  								-- if points are greater than 3000, categorize as 'gold'
         when 
@@ -35,3 +35,8 @@ select
     end as category  												-- end of CASE expression, and label the result column as 'category'
 from
     customers;  													-- specify the 'customers' table as the source of data
+
+
+
+-- see more
+-- < https://dev.mysql.com/doc/refman/8.4/en/case.html >
