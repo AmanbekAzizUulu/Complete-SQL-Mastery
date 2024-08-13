@@ -18,4 +18,4 @@ ATTENTION!
 
 - during the practise, I may have changed the names of some columns for better readability
 
-- this repository contains video tutorials that were not added to the video from the resource
+- this repository contains educational sql-querry tutorials that were not added to the video from the source
